@@ -16,26 +16,28 @@ $(function() {
     }
     positabsolute();
 
+    /**
+     * add Button Handler
+     * 
+     */
     function btnHandler() {
-        var elemPos = $(this).position().top;
+        var elemPos = this.posTop;
         var value = this.value;
 
-        console.log('btn value = ' + value);
-        console.log('NOW btnPosition = ' + elemPos);
-        console.log('NEED btnPosition = ' + posTopArr[this.value - 1]);
+        // console.log('btn value = ' + value);
+        // console.log('NOW btnPosition = ' + elemPos);
+        // console.log('NEED btnPosition = ' + posTopArr[this.value - 1]);
 
 
 
-        if (elemPos != posTopArr[this.value] - 1) {
+        if (elemPos != posTopArr[value - 1]) {
+            console.log('elempos - ' + elemPos);
+            console.log('posTopArr[value - 1] - ' + posTopArr[value - 1]);
+
 
 
             $(this).css({ top: posTopArr[this.value - 1] + 'px' });
-
-            // for (var i = 0; i < $btn_array.length; i++) {
-            //     if ($($btn_array[i]).position().top == posTopArr[this.value - 1])
-            //         elemReplace = $btn_array[i];
-            // }
-            // $(elemReplace).css({ top: elemPos + 'px' });
+            // $(this).position().top = posTopArr[this.value - 1] + 'px';
             rotator(this);
 
 
@@ -45,6 +47,8 @@ $(function() {
             for (var i = 0; i < $btn_array[i]; i++) {
                 if (i != 1)
                     $($btn_array[i]).css({ top: $btn_array[i + 1].posTop + 'px' });
+
+
             }
 
         }
@@ -52,6 +56,11 @@ $(function() {
 
     }
 
+    /**
+     * Rotate buttons
+     * 
+     * @param {any} clicked 
+     */
     function rotator(clicked) {
         console.log("val = " + clicked.value);
         for (var i = 0; i < clicked.value; i++) {
@@ -63,6 +72,13 @@ $(function() {
         }
     }
 
+    /**
+     * Save position relative btn state
+     * 
+     * @param {any} top 
+     * @param {any} left 
+     * @param {any} elem 
+     */
     function savePosition(top, left, elem) {
         $(elem).css({
 
@@ -73,6 +89,10 @@ $(function() {
     }
 
 
+    /**
+     * Set all btn absolute position
+     * 
+     */
     function positabsolute() {
         for (var i = 0; i < $btn_array.length; i++) {
             var $elem = $btn_array[i];
