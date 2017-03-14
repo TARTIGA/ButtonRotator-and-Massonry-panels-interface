@@ -1,9 +1,17 @@
 .btn__elem {
   width: 100px;
   height: 50px;
+  float: left;
   clear: both;
   margin: 10px;
-  position: static;
+  border: none;
+  background: #2196F3;
+  font-size: 18px;
+  color: #fff;
+  transition: background .5s;
+}
+.btn__elem:hover {
+  background: #2126F3;
 }
 body {
   font-family: sans-serif;
