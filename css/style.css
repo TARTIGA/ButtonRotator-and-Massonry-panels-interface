@@ -12,12 +12,12 @@ body {
   .container {
     width: 800px;
   }
-  /* ------------- Контейнер с адаптивными блоками------------- */
+  /* ------------- Container masonry------------- */
   .masonry {
     -webkit-column-count: 2;
     -moz-column-count: 2;
     column-count: 2;
-    /* Блоки Masonry */
+    /* Masonry blocks */
   }
   .masonry .item {
     display: inline-block;
@@ -74,17 +74,23 @@ body {
   .container {
     width: 100%;
   }
-  /* ------------- Контейнер с адаптивными блоками------------- */
+  /* ------------- Container masonry------------- */
   .masonry {
     -webkit-column-count: 2;
     -moz-column-count: 2;
     column-count: 2;
-    /* blocks Masonry */
+    /* Masonry blocks */
   }
   .masonry .item {
     display: inline-block;
     width: 100%;
     margin-bottom: 10px;
+  }
+  .masonry .item:hover {
+    box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
+  }
+  .masonry .item:hover .item__header {
+    font-size: 120%;
   }
   .masonry .item__header {
     font-size: 14px;

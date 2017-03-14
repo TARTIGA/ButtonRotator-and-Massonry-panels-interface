@@ -17,14 +17,14 @@ body{
     width: 800px;
 }
 
-/* ------------- Контейнер с адаптивными блоками------------- */
+/* ------------- Container masonry------------- */
 .masonry {
-	column-count: 2; // сколько колонок нужно?
+	column-count: 2; // cols number
 	-webkit-column-count: 2; -moz-column-count: 2; column-count: 2;
-/* Блоки Masonry */
+/* Masonry blocks */
  .item {
-	display: inline-block; // важно!
-	width: 100%;           // важно!
+	display: inline-block; // important!
+	width: 100%;           // important!
 	margin-bottom: 10px;
 	background-color: #eee;
             
@@ -98,15 +98,25 @@ body{
     width: 100%;
 }
 
-/* ------------- Контейнер с адаптивными блоками------------- */
+/* ------------- Container masonry------------- */
 .masonry {
 	column-count: 2; // colums count
 	-webkit-column-count: 2; -moz-column-count: 2; column-count: 2;
-/* blocks Masonry */
+/* Masonry blocks */
  .item {
-	display: inline-block; // важно!
-	width: 100%;           // важно!
+	display: inline-block; // important!
+	width: 100%;           // important!
 	margin-bottom: 10px;
+
+           
+     &:hover
+     {
+         box-shadow: 0 0 0 300px rgba(0,0,0,0.2) inset;
+     }
+      &:hover .item__header
+        {
+            font-size: 120%;
+        }
             
 
     &__header
