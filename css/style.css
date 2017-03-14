@@ -1,8 +1,131 @@
 .btn__elem {
   width: 100px;
   height: 50px;
-  float: left;
   clear: both;
   margin: 10px;
   position: static;
+}
+body {
+  font-family: sans-serif;
+}
+@media (min-width: 800px) {
+  .container {
+    width: 800px;
+  }
+  /* ------------- Контейнер с адаптивными блоками------------- */
+  .masonry {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    /* Блоки Masonry */
+  }
+  .masonry .item {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #eee;
+  }
+  .masonry .item:hover {
+    box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
+  }
+  .masonry .item:hover .item__header {
+    font-size: 120%;
+  }
+  .masonry .item__header {
+    font-size: 14px;
+    margin: 0;
+    padding: 10px;
+    transition: font-size 0.5s;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+  }
+  .masonry .item__souv {
+    width: 49%;
+    height: 200px;
+    background-color: #E91E63;
+  }
+  .masonry .item__promo {
+    width: 49%;
+    height: 400px;
+    background-color: #673AB7;
+  }
+  .masonry .item__gifts {
+    height: 405px;
+    width: 49%;
+    background-color: #F44336;
+  }
+  .masonry .item__print {
+    height: 50px;
+    width: 49%;
+    background-color: #2196F3;
+  }
+  .masonry .item__eco {
+    width: 24%;
+    height: 145px;
+    background-color: #FFEB3B;
+  }
+  .masonry .item__pack {
+    width: 24%;
+    height: 145px;
+    background-color: #1DE9B6;
+  }
+}
+@media screen and (min-width: 700px) and (max-width: 799px) {
+  .container {
+    width: 100%;
+  }
+  /* ------------- Контейнер с адаптивными блоками------------- */
+  .masonry {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    /* blocks Masonry */
+  }
+  .masonry .item {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .masonry .item__header {
+    font-size: 14px;
+    margin: 0;
+    padding: 10px;
+    transition: font-size 0.5s;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+  }
+  .masonry .item__souv {
+    width: 48%;
+    height: 200px;
+    background-color: #E91E63;
+  }
+  .masonry .item__promo {
+    width: 48%;
+    height: 200px;
+    background-color: #673AB7;
+  }
+  .masonry .item__gifts {
+    width: 48%;
+    height: 200px;
+    background-color: #F44336;
+  }
+  .masonry .item__print {
+    width: 48%;
+    height: 200px;
+    background-color: #2196F3;
+  }
+  .masonry .item__eco {
+    width: 48%;
+    height: 200px;
+    background-color: #FFEB3B;
+  }
+  .masonry .item__pack {
+    width: 48%;
+    height: 200px;
+    background-color: #1DE9B6;
+  }
+  .masonry .wh49200 {
+    width: 48%;
+    height: 200px;
+  }
 }

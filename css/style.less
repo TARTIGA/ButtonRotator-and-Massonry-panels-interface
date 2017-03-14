@@ -2,8 +2,162 @@
 {
     width:100px;
     height: 50px;
-    float:left;
+
     clear: both;
     margin:10px;
     position: static;
+}
+body{
+    font-family: sans-serif;
+}
+@media  (min-width: 800px) {
+
+.container
+{
+    width: 800px;
+}
+
+/* ------------- Контейнер с адаптивными блоками------------- */
+.masonry {
+	column-count: 2; // сколько колонок нужно?
+	-webkit-column-count: 2; -moz-column-count: 2; column-count: 2;
+/* Блоки Masonry */
+ .item {
+	display: inline-block; // важно!
+	width: 100%;           // важно!
+	margin-bottom: 10px;
+	background-color: #eee;
+            
+     &:hover
+     {
+         box-shadow: 0 0 0 300px rgba(0,0,0,0.2) inset;
+     }
+      &:hover .item__header
+        {
+            font-size: 120%;
+        }
+
+    &__header
+    {
+        font-size: 14px;
+        margin:0;
+        padding: 10px;
+        transition: font-size .5s;
+        -webkit-font-smoothing: antialiased;
+        color:#fff;
+    }
+    &__souv
+    {
+       width: 49%;
+        height: 200px;
+        background-color: #E91E63;
+    }
+    &__promo
+    {
+         width: 49%;
+        height: 400px;
+          background-color:#673AB7;
+         
+    }
+    &__gifts
+    {
+         height:405px;
+         width: 49%;
+          background-color: #F44336;
+       
+    }
+    &__print
+    {
+
+        height: 50px;
+        width: 49%;
+         background-color:#2196F3;
+
+    }
+       &__eco 
+        {
+             width: 24%;
+            height: 145px;
+            background-color: #FFEB3B
+           
+        }
+       &__pack 
+        {
+             width: 24%;
+             height: 145px;
+        background-color: #1DE9B6
+        }
+    
+}
+}
+}
+
+@media screen and (min-width: 700px) and (max-width: 799px) {
+.container
+{
+    width: 100%;
+}
+
+/* ------------- Контейнер с адаптивными блоками------------- */
+.masonry {
+	column-count: 2; // colums count
+	-webkit-column-count: 2; -moz-column-count: 2; column-count: 2;
+/* blocks Masonry */
+ .item {
+	display: inline-block; // важно!
+	width: 100%;           // важно!
+	margin-bottom: 10px;
+            
+
+    &__header
+    {
+        font-size: 14px;
+        margin:0;
+        padding: 10px;
+        transition: font-size .5s;
+        -webkit-font-smoothing: antialiased;
+        color:#fff;
+    }
+    &__souv
+    {
+       .wh49200;
+        background-color: #E91E63;
+    }
+    &__promo
+    {
+         .wh49200;
+          background-color:#673AB7;
+         
+    }
+    &__gifts
+    {
+         .wh49200;
+          background-color: #F44336;
+       
+    }
+    &__print
+    {
+
+        .wh49200;
+         background-color:#2196F3;
+
+    }
+       &__eco 
+        {
+              .wh49200;
+            background-color: #FFEB3B
+           
+        }
+       &__pack 
+        {
+              .wh49200;
+        background-color: #1DE9B6
+        }
+}
+.wh49200
+    {
+        width: 48%;
+        height: 200px;
+    }
+}
 }
