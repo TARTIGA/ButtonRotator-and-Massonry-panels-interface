@@ -1,56 +1,54 @@
 $(function() {
-    var $btn_array = $(".btn__elem");
-    var posTopArr = [];
+    var $btn_array = $(".btn__elem"); // init array of elements
+    var posTopArr = []; // positions array
 
 
     for (var i = 0; i < $btn_array.length; i++) {
 
         var $elem = $btn_array[i];
         savePosition($($elem).position().top, $($elem).position().left, $elem);
-
         $elem.value = $($elem).html();
         $elem.posTop = $($elem).position().top;
+        $elem.position = i;
+        $elem.changed = 0;
+        $elem.changePosition = function() {};
         posTopArr[i] = $($elem).position().top;
-        $($elem).on("click", btnHandler);
-        console.log('$($elem).position().top' + $($elem).offset().top);
+        $($elem).on("click", btnHandler); // add buttons handler
     }
-    positabsolute();
+    positabsolute(); // absolute position
 
     /**
-     * add Button Handler
+     *  Buttons Handler
      * 
      */
     function btnHandler() {
-        var elemPos = this.posTop;
         var value = this.value;
-
-        // console.log('btn value = ' + value);
-        // console.log('NOW btnPosition = ' + elemPos);
-        // console.log('NEED btnPosition = ' + posTopArr[this.value - 1]);
-
-
-
-        if (elemPos != posTopArr[value - 1]) {
-            console.log('elempos - ' + elemPos);
-            console.log('posTopArr[value - 1] - ' + posTopArr[value - 1]);
-
-
-
-            $(this).css({ top: posTopArr[this.value - 1] + 'px' });
-            // $(this).position().top = posTopArr[this.value - 1] + 'px';
+        elemPosTop = $(this).position().top;
+        this.posTop = $(this).position().top;
+        alert("elemPosTop NOW == " + elemPosTop);
+        alert("pos in array position == " + getPosition(elemPosTop));
+        alert("Position == " + this.position);
+        if (elemPosTop != posTopArr[value - 1]) {
+            alert("NOT! his place");
+            // $(this).css({ top: posTopArr[this.value - 1] + 'px' });
             rotator(this);
-
-
         } else {
-            $(this).css({ top: posTopArr[0] + 'px' });
-            alert("YES");
-            for (var i = 0; i < $btn_array[i]; i++) {
-                find
-                if (i != 1)
-                    $($btn_array[i]).css({ top: $btn_array[i + 1].posTop + 'px' });
+            // $(this).css({ top: posTopArr[0] + 'px' });
+            alert("On his place");
 
-
+            for (var i = 0; i < getPosition(this.posTop); i++) {
+                if (this.value != 1) {
+                    var rotatedBtn = $btn_array[i];
+                    console.log('rotatedBtn --- ' + rotatedBtn.value);
+                    var rotateBtnPos = getPosition(rotatedBtn.posTop);
+                    console.log('rotatedBtn POS--- ' + rotateBtnPos);
+                    changePosition(rotatedBtn, posTopArr[rotateBtnPos + 1]);
+                }
             }
+            changePosition(this, posTopArr[0]);
+            this.posTop = posTopArr[0];
+            this.position = getPosition(posTopArr[0]);
+            // reloadMass();
 
         }
 
@@ -58,18 +56,64 @@ $(function() {
     }
 
     /**
-     * Rotate buttons
+     * function for rotate  buttons
      * 
      * @param {any} clicked 
      */
     function rotator(clicked) {
-        console.log("val = " + clicked.value);
-        for (var i = 0; i < clicked.value; i++) {
-            if ($btn_array[i].posTop != posTopArr[0]) {
-                var val = $btn_array[i].value;
-                $($btn_array[i]).css({ top: $btn_array[i - 1].posTop + 'px' });
+        // $btn_array = reloadMass();
+        var isPos = posTopArr[clicked.value - 1];
+        console.log('clicked.value - ' + clicked.value + " AND isPos = " + getPosition(isPos));
+        if (clicked.value < getPosition(clicked.posTop) + 1) {
+            console.log("position more than need");
+            for (var i = 0; i < getPosition(clicked.posTop); i++) {
+
+                //FOR 2 
+                if (clicked.value == 2) {
+                    alert("DVOIKA SUK");
+                    i++;
+                    var rotatedBtn = $btn_array[i];
+                    console.log('rotatedBtn --- ' + rotatedBtn.value);
+                    var rotateBtnPos = getPosition(rotatedBtn.posTop);
+                    console.log('rotatedBtn POS--- ' + rotateBtnPos);
+                    changePosition(rotatedBtn, posTopArr[rotateBtnPos + 1]);
+                } else {
+                    var rotatedBtn = $btn_array[i];
+                    console.log('rotatedBtn --- ' + rotatedBtn.value);
+                    var rotateBtnPos = getPosition(rotatedBtn.posTop);
+                    console.log('rotatedBtn POS--- ' + rotateBtnPos);
+                    changePosition(rotatedBtn, posTopArr[rotateBtnPos + 1]);
+
+                }
             }
 
+        } else {
+            console.log("position less that need");
+            for (var i = 0; i < clicked.value; i++) {
+                var rotatedBtn = $btn_array[i];
+                // if (rotatedBtn.posTop != posTopArr[0]) { // SOME IF DONT NOW WHY
+                var rotateBtnPos = getPosition(rotatedBtn.posTop);
+                changePosition(rotatedBtn, posTopArr[rotateBtnPos - 1]);
+                // }
+
+            }
+        }
+        changePosition(clicked, isPos);
+        clicked.posTop = isPos;
+        clicked.position = getPosition(isPos);
+        // reloadMass();
+    }
+
+    function changePosition(elem, dest) {
+        console.log("ITS A LIVE dest =" + dest);
+        $(elem).css({ top: dest + 'px' });
+    }
+
+
+    function getPosition(nowPosTop) {
+        for (var i = 0; i < posTopArr.length; i++) {
+            if (nowPosTop == posTopArr[i])
+                return i;
         }
     }
 
@@ -82,13 +126,10 @@ $(function() {
      */
     function savePosition(top, left, elem) {
         $(elem).css({
-
             top: top,
             left: left
         });
-
     }
-
 
     /**
      * Set all btn absolute position
@@ -103,4 +144,23 @@ $(function() {
         }
     }
 
+    function sortInRotator(direction) {
+        var rotatedBtn = $btn_array[i];
+        console.log('rotatedBtn --- ' + rotatedBtn.value);
+        var rotateBtnPos = getPosition(rotatedBtn.posTop);
+        console.log('rotatedBtn POS--- ' + rotateBtnPos);
+        changePosition(rotatedBtn, posTopArr[rotateBtnPos + direction]);
+    }
+
+
+    function reloadMass() {
+        $NEWbtn_array = {};
+        for (var i = 0; i < $btn_array.length; i++) {
+            var $elem;
+            $NEWbtn_array[i] = $elem;
+            $elem.posTop = $($elem).position().top;
+            $elem.position = $elem.position;
+        }
+        return $NEWbtn_array;
+    }
 });
