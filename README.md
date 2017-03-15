@@ -1,4 +1,4 @@
-# Test Works for Job 
+# Test Works for GroupM
 ## Task 1 - Create button rotator. 
 Buttons are located randomly.
 1) Then you click on First time on the button , her needs to go in "button value" position.
