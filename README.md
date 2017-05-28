@@ -1,4 +1,4 @@
-# Test Works for GroupM
+# Test Work for GroupM
 ## Task 1 - Create button rotator. 
 Buttons are located randomly.
 
