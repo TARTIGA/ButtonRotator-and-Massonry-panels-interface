@@ -1,20 +1,24 @@
 var rotateButtons = (function() {
-    alert("Gogogo");
+
     $(function() {
         var $container = $('.btn__container')
         var $btn_array = $container.find(".btn__elem"); // init array of elements
         var posTopArr = []; // positions array
         var button = {
+            self: this,
             obj: null,
             num: null,
+            clicks: null,
             position: null,
+            getThis: function() {
+                return this;
+            },
             getObj: function() {
                 return this.obj;
             },
             setObj: function(obj) {
                 this.obj = obj;
             },
-
             getNum: function() {
                 return this.num;
             },
@@ -27,17 +31,22 @@ var rotateButtons = (function() {
             setPos: function(pos) {
                 this.pos = pos;
             },
-            // addHandler: function(func, btn) {
-            //     func.bind(this);
-            //     $(this.getObj()).on('click', btnHandler2);
+            setClics: function(num) {
+                this.clicks = num;
+            },
+            getClics: function(num) {
+                return this.clicks;
+            },
+            reloadClicks: function() {
+                this.clicks = 0;
+            },
+            setEventListener: function() {
+                // console.info('this num' + this.getNum);
+                $(this.obj).on("click", btnHandler.bind(this)); // bind context
 
-            //     // func.bind(this);
-
-            // },
-
+            },
 
         };
-
 
         var arrBtnState = {
             buttons: [],
@@ -57,50 +66,54 @@ var rotateButtons = (function() {
         };
 
         function init() {
+            var arr = Object.create(arrBtnState);
             for (var i = 0; i < $btn_array.length; i++) {
                 var $elem = $btn_array[i];
-                var btn = button;
-                var arr = arrBtnState;
+                arr.buttons[i] = Object.create(button);
+                arr.buttons[i].setObj($elem);
+                arr.buttons[i].setNum($($elem).html());
+                arr.buttons[i].setPos(i);
+                arr.buttons[i].setClics(0);
+                arr.buttons[i].setEventListener();
+            }
+            // getNumberarray(arr.buttons);
+            // console.info('arri-3' +
+            //     arrBtnState.buttons[0].getNum());
 
-                btn.setObj($btn_array[i]);
-                btn.setNum($($btn_array[i]).html());
-                btn.setPos(i);
-                arr.pushBtn(btn);
-                console.info('btn NUM === ' + btn.getNum());
+            getNumberarray(arr.buttons);
+        }
 
-                $(btn.getObj()).on('click', btnHandler2(btn));
-                // btnHandler2.bind(btn);
-
-
-
-
-
-                // arrBtnState.pushBtn(btn);
-                // arrBtnState.pushBtn(btn);
-                // console.info('arr button numb arr - ' + arr.getBtns());
-                console.info('arr button numb - ' + arr.buttons[i].getNum());
-                console.info('arr button pos - ' + arr.buttons[i].getPos());
-
-                savePosition($(btn.getObj()).position().top, $(btn.getObj()).position().left, btn.getObj());
-
-                savePosition($($elem).position().top, $($elem).position().left, $elem); // save all static position for absolute
-                $elem.value = $($elem).html(); // inner value
-                // console.info('  $elem.value' + $elem.value);
-                $elem.posTop = $($elem).position().top; // Get the current coordinates top
-                $elem.position = i; // init first position element after window.load
-                $elem.changed = 0; // counter of changed (not use)
-                posTopArr[i] = $($elem).position().top; // positions array new elements
-                // $($elem).on("click", btnHandler); // add buttons handler
-
-                // btn.addHandler(btnHandler2, btn);
-
+        function getNumberarray(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                console.info('arri--' + i + ' ' +
+                    arr[i].getNum());
 
             }
-            positabsolute(); // absolute position all btns
+        }
+
+        function btnHandler() {
+            console.info('this.num ' + this.getNum() + " / this.clicks == " + this.getClics());
+            switch (this.getClics()) {
+                case 0:
+                    this.setClics(1);
+                    break;
+                case 1:
+                    this.setClics(2);
+                    break;
+                case 2:
+                    this.reloadClicks();
+                    break;
+            }
 
 
 
         }
+
+
+
+        init();
+
+
 
 
 
