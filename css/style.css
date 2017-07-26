@@ -1,155 +1,183 @@
 .btn__elem {
-  width: 100px;
-  height: 50px;
-  float: left;
-  clear: both;
-  margin: 10px;
-  border: none;
-  background: #2196F3;
-  font-size: 18px;
-  color: #fff;
-  transition: background .5s;
-}
-.btn__elem:hover {
-  background: #2126F3;
-}
-body {
-  font-family: sans-serif;
-}
-@media (min-width: 800px) {
-  .container {
-    width: 800px;
-  }
-  /* ------------- Container masonry------------- */
-  .masonry {
-    -webkit-column-count: 2;
-    -moz-column-count: 2;
-    column-count: 2;
-    /* Masonry blocks */
-  }
-  .masonry .item {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 10px;
-    background-color: #eee;
-  }
-  .masonry .item:hover {
-    -webkit-box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
-    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
-    /* Firefox 3.5 - 3.6 */
-    box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
-    /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
-  }
-  .masonry .item:hover .item__header {
-    font-size: 120%;
-  }
-  .masonry .item__header {
-    font-size: 14px;
-    margin: 0;
-    padding: 10px;
-    transition: font-size 0.5s;
-    -webkit-font-smoothing: antialiased;
-    color: #fff;
-  }
-  .masonry .item__souv {
-    width: 49%;
-    height: 200px;
-    background-color: #E91E63;
-  }
-  .masonry .item__promo {
-    width: 49%;
-    height: 400px;
-    background-color: #673AB7;
-  }
-  .masonry .item__gifts {
-    height: 405px;
-    width: 49%;
-    background-color: #F44336;
-  }
-  .masonry .item__print {
+    width: 100px;
     height: 50px;
-    width: 49%;
-    background-color: #2196F3;
-  }
-  .masonry .item__eco {
-    width: 24%;
-    height: 145px;
-    background-color: #FFEB3B;
-  }
-  .masonry .item__pack {
-    width: 24%;
-    height: 145px;
-    background-color: #1DE9B6;
-  }
-}
-@media screen and (max-width: 799px) {
-  .container {
-    width: 100%;
-  }
-  /* ------------- Container masonry------------- */
-  .masonry {
-    -webkit-column-count: 2;
-    -moz-column-count: 2;
-    column-count: 2;
-    /* Masonry blocks */
-  }
-  .masonry .item {
-    display: inline-block;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .masonry .item:hover {
-    -webkit-box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
-    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
-    /* Firefox 3.5 - 3.6 */
-    box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
-    /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
-  }
-  .masonry .item:hover .item__header {
-    font-size: 120%;
-  }
-  .masonry .item__header {
-    font-size: 14px;
-    margin: 0;
-    padding: 10px;
-    transition: font-size 0.5s;
-    -webkit-font-smoothing: antialiased;
+    float: left;
+    clear: both;
+    margin: 10px;
+    border: none;
+    background: #2196F3;
+    font-size: 18px;
     color: #fff;
-  }
-  .masonry .item__souv {
-    width: 48%;
-    height: 200px;
-    background-color: #E91E63;
-  }
-  .masonry .item__promo {
-    width: 48%;
-    height: 200px;
-    background-color: #673AB7;
-  }
-  .masonry .item__gifts {
-    width: 48%;
-    height: 200px;
-    background-color: #F44336;
-  }
-  .masonry .item__print {
-    width: 48%;
-    height: 200px;
-    background-color: #2196F3;
-  }
-  .masonry .item__eco {
-    width: 48%;
-    height: 200px;
-    background-color: #FFEB3B;
-  }
-  .masonry .item__pack {
-    width: 48%;
-    height: 200px;
-    background-color: #1DE9B6;
-  }
-  .masonry .wh49200 {
-    width: 48%;
-    height: 200px;
-  }
+    transition: all 1s;
+}
+
+.rotate {
+    -webkit-animation: anim 1s infinite linear;
+    animation: anim 1s infinite linear;
+    opacity: 0.8;
+}
+
+.btn__elem:hover {
+    background: #2126F3;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+@-webkit-keyframes anim {
+    from {
+        -webkit-transform: rotateX(0deg);
+    }
+    to {
+        -webkit-transform: rotateX(360deg);
+    }
+}
+
+@keyframes anim {
+    from {
+        transform: rotateX(0deg);
+    }
+    to {
+        transform: rotateX(360deg);
+    }
+}
+
+@media (min-width: 800px) {
+    .container {
+        width: 800px;
+    }
+    /* ------------- Container masonry------------- */
+    .masonry {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+        /* Masonry blocks */
+    }
+    .masonry .item {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 10px;
+        background-color: #eee;
+    }
+    .masonry .item:hover {
+        -webkit-box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
+        /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+        -moz-box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
+        /* Firefox 3.5 - 3.6 */
+        box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
+        /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+    }
+    .masonry .item:hover .item__header {
+        font-size: 120%;
+    }
+    .masonry .item__header {
+        font-size: 14px;
+        margin: 0;
+        padding: 10px;
+        transition: font-size 0.5s;
+        -webkit-font-smoothing: antialiased;
+        color: #fff;
+    }
+    .masonry .item__souv {
+        width: 49%;
+        height: 200px;
+        background-color: #E91E63;
+    }
+    .masonry .item__promo {
+        width: 49%;
+        height: 400px;
+        background-color: #673AB7;
+    }
+    .masonry .item__gifts {
+        height: 405px;
+        width: 49%;
+        background-color: #F44336;
+    }
+    .masonry .item__print {
+        height: 50px;
+        width: 49%;
+        background-color: #2196F3;
+    }
+    .masonry .item__eco {
+        width: 24%;
+        height: 145px;
+        background-color: #FFEB3B;
+    }
+    .masonry .item__pack {
+        width: 24%;
+        height: 145px;
+        background-color: #1DE9B6;
+    }
+}
+
+@media screen and (max-width: 799px) {
+    .container {
+        width: 100%;
+    }
+    /* ------------- Container masonry------------- */
+    .masonry {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+        /* Masonry blocks */
+    }
+    .masonry .item {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .masonry .item:hover {
+        -webkit-box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
+        /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+        -moz-box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
+        /* Firefox 3.5 - 3.6 */
+        box-shadow: 0 0 0 300px rgba(0, 0, 0, 0.2) inset;
+        /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+    }
+    .masonry .item:hover .item__header {
+        font-size: 120%;
+    }
+    .masonry .item__header {
+        font-size: 14px;
+        margin: 0;
+        padding: 10px;
+        transition: font-size 0.5s;
+        -webkit-font-smoothing: antialiased;
+        color: #fff;
+    }
+    .masonry .item__souv {
+        width: 48%;
+        height: 200px;
+        background-color: #E91E63;
+    }
+    .masonry .item__promo {
+        width: 48%;
+        height: 200px;
+        background-color: #673AB7;
+    }
+    .masonry .item__gifts {
+        width: 48%;
+        height: 200px;
+        background-color: #F44336;
+    }
+    .masonry .item__print {
+        width: 48%;
+        height: 200px;
+        background-color: #2196F3;
+    }
+    .masonry .item__eco {
+        width: 48%;
+        height: 200px;
+        background-color: #FFEB3B;
+    }
+    .masonry .item__pack {
+        width: 48%;
+        height: 200px;
+        background-color: #1DE9B6;
+    }
+    .masonry .wh49200 {
+        width: 48%;
+        height: 200px;
+    }
 }

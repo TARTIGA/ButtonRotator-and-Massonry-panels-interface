@@ -1,9 +1,8 @@
 var rotateButtons = (function() {
 
     $(function() {
-        var $container = $('.btn__container')
+        var $container = $('.btn__container') // main html container
         var $btn_array = $container.find(".btn__elem"); // init array of elements
-        var posTopArr = []; // positions array
         var button = {
             self: this,
             obj: null,
@@ -13,9 +12,11 @@ var rotateButtons = (function() {
                 top: this.top,
                 left: this.left
             },
-            pos: null,
-            getThis: function() {
-                return this;
+            getPositionTop: function() {
+                return this.position.top;
+            },
+            setPositionTop: function(top) {
+                this.position.top = top;
             },
             getObj: function() {
                 return this.obj;
@@ -49,22 +50,13 @@ var rotateButtons = (function() {
             getClics: function() {
                 return this.clicks;
             },
-            reloadClicks: function() {
-                this.clicks = 0;
-            },
             setEventListener: function() {
                 // console.info('this num' + this.getNum);
                 $(this.obj).on("click", btnHandler.bind(this)); // bind context
 
             },
-            savePosition: function(top, left) {
-
-                this.position.top = top;
-                this.position.left = left;
-
-            },
-        }
-
+        };
+        // MAin state
         var arrBtnState = {
             buttons: [],
             pushBtn: function(btn) {
@@ -89,16 +81,15 @@ var rotateButtons = (function() {
             // reload position to Absolute
             for (var i = 0; i < $btn_array.length; i++) {
                 var $elem = $btn_array[i];
+                //SETS 
                 arrBtnState.buttons[i] = Object.create(button);
                 arrBtnState.buttons[i].setObj($elem);
                 arrBtnState.buttons[i].setNum($($elem).html());
                 arrBtnState.buttons[i].setPos(i + 1); // because we have 1,2,3 ... elements and don't have 0 
                 arrBtnState.buttons[i].setClics(0);
                 arrBtnState.buttons[i].setEventListener();
-
-
-                var obj = arrBtnState.buttons[i].getObj()
-
+                // cash object
+                var obj = arrBtnState.buttons[i].getObj();
                 // Save position
                 savePosition(obj); // save all static position for absolute
                 // Set position to btn
@@ -110,12 +101,9 @@ var rotateButtons = (function() {
                 // console.info(' $(obj).position().top; -- ' + arrBtnState.buttons[i].position.top);
 
             }
-            positabsolute($btn_array);
-            // console.info(' arr.positionsBTNS[i]---' + arrPos.length);
+            positabsolute($btn_array); // absolute position for all (absolute important position for translate)
+            getNumberarray(arrBtnState.buttons); //LOG
 
-
-            getNumberarray(arrBtnState.buttons);
-            //getPosArray(arrPos);
         }
 
         /**
@@ -125,27 +113,14 @@ var rotateButtons = (function() {
          */
         function getNumberarray(arr) {
             for (var i = 0; i < arr.length; i++) {
-                console.info('arri--' + i + ' ' +
+                console.info('arr [' + i + '] -- NUM = ' +
                     arr[i].getNum() + "---pos = " + arr[i].getPos());
 
             }
         }
 
         /**
-         * POS LOG 
-         * 
-         * @param {any} arrPos 
-         */
-        function getPosArray(arrPos) {
-            for (var i = 0; i < arrPos.length; i++) {
-                console.info('pos --- [' + i + '] ' +
-                    " --- " + arrPos[i]);
-
-            }
-        }
-
-        /**
-         * 
+         * MAin Handler Click on object
          * 
          */
         function btnHandler() {
@@ -154,19 +129,14 @@ var rotateButtons = (function() {
                 " / this.pos == " + this.getPos() +
                 " / this.position top== " + this.position.top);
             rotator(this);
-            switchClicks(this.getClics(), this);
-
-
 
         }
-
         /**
-         * MAin Rotator function
+         * Main Rotator function
          * 
          * @param {any} elem 
          */
         function rotator(elem) {
-            console.info('ROTATOR');
 
             let position = elem.getPos();
             let num = elem.getNum();
@@ -177,77 +147,67 @@ var rotateButtons = (function() {
                 if (elem.clicks == 0) {
                     console.info('NOT EQUAL!!!' + buttons.length);
                     for (var i = 0; i < buttons.length; i++) {
-                        if (buttons[i].pos == elem.getNum()) {
-                            var elemPosTopStart = elem.position.top;
-                            dest = buttons[i];
+                        if (buttons[i].getPos() == elem.getNum()) {
+                            dest = buttons[i]; // add destination to check
                             console.info('dest num who on position -- ' + buttons[i].num);
-                            console.info('dest pos who on position -- ' + buttons[i].pos);
                             console.info('dest posTop who on position -- ' + buttons[i].position.top);
-                            console.info('this elem position -- ' + elem.pos);
-                            // getNumberarray(buttons);
                         }
-
                     }
-                    console.info('elem pos= ' + elem.position.top);
-                    console.info('dest pos= ' + dest.position.top);
-                    changeBtns(elem, dest);
-                    // resetMass(elem, buttons[i]);
-                    // savePosition(elem.getObj());
-                    // savePosition(dest.getObj());
+                    changeBtns(elem, dest); // Change
                 }
+                getNumberarray(buttons); // LOG
+
             } else {
-
-                // $(elem.getObj()).hide();
-
                 console.info('EQUAL!!!');
+                changeBtns(elem, buttons[0]); // Change for dist = buttons[0]
             }
 
         }
 
 
         /**
-         * Change position
+         * Change btns in array and object positionm 
          * 
-         * @param {Object} elem 
-         * @param {int} dest 
+         * @param {Object button} elem 
+         * @param {Object button} dest 
          */
         function changeBtns(elem, dest) {
 
-            var startPosition = elem.position.top
-            var startNum = elem.num;
-            var startPos = elem.pos;
-            var destPosTop = dest.position.top
+            var startPosTop = elem.getPositionTop();
+            var destPosTop = dest.getPositionTop();
+            var startPos = elem.getPos();
+            var startPosDest = dest.getPos();
 
-            $(elem.getObj()).css({ top: destPosTop + 'px' });
-            $(dest.getObj()).css({ top: startPosition + 'px' });
+            // $(elem.getObj()).css({ top: destPosTop + 'px' });
+            // $(dest.getObj()).css({ top: startPosTop + 'px' });
 
-
-            elem.position.top = dest.position.top;
-            dest.position.top = startPosition;
+            animationBtnsTranslate(elem, dest, startPosTop, destPosTop); // animate translate
 
             elem.pos = dest.pos;
             dest.pos = startPos;
 
-            arrBtnState.buttons[elem.num - 1] = dest;
-            arrBtnState.buttons[dest.num - 1] = elem;
+            elem.position.top = dest.position.top;
+            dest.position.top = startPosTop;
 
+            arrBtnState.buttons[startPos - 1] = dest;
+            arrBtnState.buttons[startPosDest - 1] = elem;
+        }
 
+        function animationBtnsTranslate(elem, dest, startPosTop, destPosTop) {
+            // var startPosTop = elem.getPositionTop();
+            // var destPosTop = dest.getPositionTop();
+            $(elem.getObj()).css({ top: destPosTop + 'px' }).addClass("rotate");
+            $(dest.getObj()).css({ top: startPosTop + 'px' }).addClass("rotate");
 
-
-
+            setTimeout(function() {
+                $(elem.getObj()).removeClass("rotate");
+            }, 1000);
+            setTimeout(function() {
+                $(dest.getObj()).removeClass("rotate");
+            }, 1000);
 
         }
 
-        function resetMass(elem, dest) {
-            var startPos = elem.pos;
-            var buttons = arrBtnState.buttons;
-            var arrPos = arrBtnState.posBtnTop;
-            for (var i = 0; i < buttons.length; i++) {
-                if (arrBtnState.buttons[i].position.top == arrPos[i])
-                    arrBtnState.buttons[i] = dest;
-
-            }
-        }
 
         /**
          * Set all arrayBtn absolute position
@@ -262,7 +222,7 @@ var rotateButtons = (function() {
             }
         }
         /**
-         * Save position relative arrayBtn state
+         * Save  position  arrayBtn [html] state
          * 
          * @param {$px} top 
          * @param {$px} left 
@@ -274,40 +234,6 @@ var rotateButtons = (function() {
                 left: $(elem).position().left
             });
         }
-
-
-
-
-        function resetMass() {
-            // for (var i = 0; i < $btn_array.length; i++) {
-            //     var $elem = $btn_array[i];
-            //     arrBtnState.buttons[i].setObj($elem);
-            //     arrBtnState.buttons[i].setNum($($elem).html());
-            //     arrBtnState.buttons[i].setPos(i + 1); // because we have 1,2,3 ... elements and don't have 0 
-            // }
-        }
-
-
-        /**
-         * Switch Clicks num
-         * 
-         * @param {any} clicks 
-         * @param {any} elem 
-         */
-        function switchClicks(clicks, elem) {
-            switch (clicks) {
-                case 0:
-                    elem.setClics(1);
-                    break;
-                case 1:
-                    elem.setClics(2);
-                    break;
-                case 2:
-                    elem.setClics(2);
-                    break;
-            }
-        }
-
 
 
         // MAIN INIT
